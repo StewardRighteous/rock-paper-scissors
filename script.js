@@ -31,13 +31,33 @@ function convertNumToChoice(randomNumber){
 }
 
 let computerChoice = getComputerChoice();
-console.log(computerChoice);
 
 // Get value form user for Rock Paper and Scissor
-    /*  variables : choice
+    /*  variables : shortFormChoice, choice
         output: Rock/ paper/ Scissors
         input: user gives R/P/S (short form)
         procedure:
             Create a prompt to get value (shortform)
             convert shortForm to choice
             Store it as Human Choice */
+
+function getHumanChoice(){
+    let shortFormChoice = prompt(`Rock(R), Paper(P) and Scissors(S) - Enter your Choice : `);
+    let choice = convertShortFormToChoice(shortFormChoice);
+    return choice;
+}
+
+function convertShortFormToChoice(shortFormChoice){
+    switch (shortFormChoice){
+        case "R" || "r":
+            return "Rock"
+        case "P" || "p":
+            return "Paper"
+        case "S" || "s":
+            return "Scissors";
+        default:
+            console.error("Wrong Input Value \n Enter R for Rock, P for Paper, S for Scissors ");
+    }
+}
+
+let humanChoice = getHumanChoice();
