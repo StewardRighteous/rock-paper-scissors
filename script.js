@@ -5,7 +5,12 @@
     4. Give points to the person won
     5. Final Winner Message */
 
-// Computer generates Rock, paper and scissor
+// Storing Computer and Human Scores 
+let humanScore = 0;
+let computerScore = 0;
+
+
+// Computer generates Rock, paper or scissor
     /*  variables : randomNumber, choice
         output : Rock/ paper/ scissors
         input : null
@@ -29,8 +34,6 @@ function convertNumToChoice(randomNumber){
         return "Scissors";
     }
 }
-
-let computerChoice = getComputerChoice();
 
 // Get value form user for Rock Paper and Scissor
     /*  variables : shortFormChoice, choice
@@ -60,4 +63,47 @@ function convertShortFormToChoice(shortFormChoice){
     }
 }
 
-let humanChoice = getHumanChoice();
+// Compare the values and say who won
+    /*  variables : computerChoice, humanChoice, combineChoice, winner
+        output: Computer or Human
+        input : computerChoice, humanChoice
+        procedure:
+            Get user and computer choices
+            Create conditions that returns which wins
+                IF rock AND scissors THEN rock
+                IF scissors AND paper THEN scissors
+                IF paper and rock THEN paper
+                IF both are same THEN draw
+            Use that value to return the winner name or draw*/
+
+function getWinner(){
+    let computerChoice = getComputerChoice();
+    let humanChoice = getHumanChoice();
+    let winningElement = getWinningElement(computerChoice,humanChoice);
+    let winner = checkWinningElement(winningElement, computerChoice, humanChoice);
+    return winner;
+}
+
+function getWinningElement(c1, c2){  // c is for choice
+    if ((c1 == "Rock" && c2 == "Scissors")||(c2 == "Rock" && c1 == "Scissors")){
+        return "Rock"
+    }else if((c1 == "Scissors" && c2 == "Paper")||(c2 == "Scissors" && c1 == "Paper")){
+        return "Scissors"
+    }else if((c1 == "Paper" && c2== "Rock")||(c2 == "Paper" && c1== "Rock")){
+        return "Paper"
+    }else{
+        return "draw"
+    }
+}
+
+function checkWinningElement(winningElement, computerChoice, humanChoice){
+    if(winningElement == computerChoice){
+        return "Computer";
+    }else if(winningElement == humanChoice){
+        return "Human";
+    }else{
+        return "draw"
+    }
+}
+
+let winner = getWinner();
