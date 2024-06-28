@@ -5,11 +5,6 @@
     4. Give points to the person won
     5. Final Winner Message */
 
-// Storing Computer and Human Scores 
-let humanScore = 0;
-let computerScore = 0;
-
-
 // Computer generates Rock, paper or scissor
     /*  variables : randomNumber, choice
         output : Rock/ paper/ scissors
@@ -76,9 +71,7 @@ function convertShortFormToChoice(shortFormChoice){
                 IF both are same THEN draw
             Use that value to return the winner name or draw*/
 
-function getWinner(){
-    let computerChoice = getComputerChoice();
-    let humanChoice = getHumanChoice();
+function getWinner(computerChoice, humanChoice){
     let winningElement = getWinningElement(computerChoice,humanChoice);
     let winner = checkWinningElement(winningElement, computerChoice, humanChoice);
     return winner;
@@ -106,4 +99,55 @@ function checkWinningElement(winningElement, computerChoice, humanChoice){
     }
 }
 
-let winner = getWinner();
+//Give points to the person who won
+    /*  variables: humanChoice, computerChoice, computerPoint, humanPoint, winner
+        output: Point goes to YOU or COMPUTER
+        input: winner
+        procedure:
+            Have initial points as 0 for both human and computer
+            Get values for both human and computer
+            Find the winner 
+            Print who won followed by element they chose as sentence
+                find who won or draw
+                find element that won
+            Add points to winner*/
+
+function playground(){
+    let humanScore = 0;
+    let computerScore = 0;
+    let computerChoice = getComputerChoice();
+    let humanChoice = getHumanChoice();
+    let winningElement = getWinningElement(humanChoice, computerChoice);
+    let winner = getWinner(computerChoice, humanChoice);
+    let winnerText = getWinnerText(winner) + '' + getWinningElementText(winningElement);
+    console.log(winnerText);
+    if(winner == "Computer" ){
+        computerScore++;
+    }else if (winner=="Human"){
+        humanScore++;
+    }
+}
+
+function getWinnerText(winner){
+    if(winner == "Computer"){
+        return "You lose!";
+    }else if(winner == "Human"){
+        return "You Win!";
+    }else{
+        return "Draw! ";
+    }
+}
+
+function getWinningElementText(winningElement){
+    if (winningElement == "Rock"){
+        return "Rock beats Scissors!";
+    }else if(winningElement == "Scissors"){
+        return "Scissors cuts paper!";
+    }else if(winningElement == "Paper"){
+        return "Paper covers Rock!";
+    } else{
+        return "You both chose the same!";
+    }
+}
+
+playground();
