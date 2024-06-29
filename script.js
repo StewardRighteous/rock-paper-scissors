@@ -37,6 +37,7 @@ function convertNumToChoice(randomNumber){
         procedure:
             Create a prompt to get value (shortform)
             convert shortForm to choice
+                IF human gave unknown choice THEN return error
             Store it as Human Choice */
 
 function getHumanChoice(){
@@ -55,6 +56,7 @@ function convertShortFormToChoice(shortFormChoice){
             return "Scissors";
         default:
             console.error("Wrong Input Value \n Enter R for Rock, P for Paper, S for Scissors ");
+            return "Error";
     }
 }
 
@@ -106,6 +108,7 @@ function checkWinningElement(winningElement, computerChoice, humanChoice){
         procedure:
             Have initial points as 0 for both human and computer
             Get values for both human and computer
+                IF human gave unknown choice THEN return nothing and start again
             Find the winner 
             Print who won followed by element they chose as sentence
                 find who won or draw
@@ -115,6 +118,9 @@ function checkWinningElement(winningElement, computerChoice, humanChoice){
 function playground(){
     let computerChoice = getComputerChoice();
     let humanChoice = getHumanChoice();
+    if(humanChoice == "Error"){
+        return;
+    }
     let winningElement = getWinningElement(humanChoice, computerChoice);
     let winner = getWinner(computerChoice, humanChoice);
     let winnerText = getWinnerText(winner) + '' + getWinningElementText(winningElement);
