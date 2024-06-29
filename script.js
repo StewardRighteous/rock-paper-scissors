@@ -113,19 +113,13 @@ function checkWinningElement(winningElement, computerChoice, humanChoice){
             Add points to winner*/
 
 function playground(){
-    let humanScore = 0;
-    let computerScore = 0;
     let computerChoice = getComputerChoice();
     let humanChoice = getHumanChoice();
     let winningElement = getWinningElement(humanChoice, computerChoice);
     let winner = getWinner(computerChoice, humanChoice);
     let winnerText = getWinnerText(winner) + '' + getWinningElementText(winningElement);
     console.log(winnerText);
-    if(winner == "Computer" ){
-        computerScore++;
-    }else if (winner=="Human"){
-        humanScore++;
-    }
+    return winner;
 }
 
 function getWinnerText(winner){
@@ -150,4 +144,43 @@ function getWinningElementText(winningElement){
     }
 }
 
-playground();
+// Final Winner Message
+    /*  variables: humanScore, computerScore, winner
+        output: You WON or You LOST or DRAW
+        input: humanScore, computerScore
+        procedure:
+            Initialize human and computer scores
+            Loop 5 matches of playground and Increase values in each round according to winner
+            After completing five rounds, print the winner using Alert
+                IF human > computer THEN you WON
+                IF computer > human THEN you LOST
+                IF computer == human THEN DRAW */
+
+function playGame(){
+    let humanScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        winner = playground();
+        if(winner == "Computer" ){
+            computerScore++;
+        }else if (winner=="Human"){
+            humanScore++;
+        }else{
+            continue;
+        }
+    }
+    whoWon = getWhoWon(humanScore, computerScore);
+    alert(whoWon);
+}
+
+function getWhoWon(humanScore,computerScore){
+    if(humanScore> computerScore){
+        return "You Won!"
+    }else if(computerScore>humanScore){
+        return "You Lost!"
+    }else{
+        return "DRAW!"
+    }
+}
+
+playGame();
