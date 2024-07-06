@@ -61,9 +61,9 @@ function playRound(humanButtonChoice){
 
 function getWinnerText(winner){
     if(winner == "Computer"){
-        return "You lose!";
+        return "You lose! ";
     }else if(winner == "Human"){
-        return "You Win!";
+        return "You Win! ";
     }else{
         return "Draw! ";
     }
