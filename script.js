@@ -1,6 +1,7 @@
 const instruction = document.querySelector("#round");
 const buttons = document.querySelectorAll("div.buttons");
 const playRoundText = document.querySelector("div.playround");
+const  scores = document.querySelector("div.scores");   
 
 // Computer generates Rock, paper or scissor
 function getComputerChoice(){
@@ -82,25 +83,24 @@ function getWinningElementText(winningElement){
 }
 
 // Final Winner Message
-function playGame(){
-    let humanScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let humanChoice = getHumanChoice();
-        instruction.textContent = `Round ${i+1}/5`;
-        winner = playRound(humanChoice);
-        if(winner == "Computer" ){
-            computerScore++;
-        }else if (winner=="Human"){
-            humanScore++;
-        }else{
-            continue;
-        }
-        instruction.textContent = `SELECT AN OPTION`;
-    }
-    whoWon = getWhoWon(humanScore, computerScore);
-    alert(whoWon);
-}
+// function playGame(){
+    
+
+//         let humanChoice = getHumanChoice();
+     
+//         winner = playRound(humanChoice);
+//         if(winner == "Computer" ){
+//             computerScore++;
+//         }else if (winner=="Human"){
+//             humanScore++;
+//         }else{
+//             continue;
+//         }
+//         instruction.textContent = `SELECT AN OPTION`;
+//     }
+//     whoWon = getWhoWon(humanScore, computerScore);
+//     alert(whoWon);
+// }
 
 function getWhoWon(humanScore,computerScore){
     if(humanScore> computerScore){
@@ -121,12 +121,16 @@ function getWhoWon(humanScore,computerScore){
         add event listener to buttons and let them start*/
 
 function playGame(){
-    buttons.forEach((button)=>{
-        button.addEventListener("click",(button)=>{
-            let humanChoice = button.target.id;
-            playRound(humanChoice);
+    let humanScore = 0;
+    let computerScore = 0;
+    let round = 0;
+        buttons.forEach((button)=>{
+            button.addEventListener("click",(button)=>{
+                let humanChoice = button.target.id;
+                instruction.textContent = `Round ${round+1}/5`;
+                playRound(humanChoice);
+            });
         });
-    });
 }
 
 playGame();
