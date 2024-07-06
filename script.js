@@ -2,6 +2,7 @@ const instruction = document.querySelector("#round");
 const buttons = document.querySelectorAll("div.buttons");
 const playRoundText = document.querySelector("div.playround");
 const  scores = document.querySelector("div.scores");   
+const scoreCard = document.querySelector("div.scorecard");
 
 // Computer generates Rock, paper or scissor
 function getComputerChoice(){
@@ -82,26 +83,6 @@ function getWinningElementText(winningElement){
     }
 }
 
-// Final Winner Message
-// function playGame(){
-    
-
-//         let humanChoice = getHumanChoice();
-     
-//         winner = playRound(humanChoice);
-//         if(winner == "Computer" ){
-//             computerScore++;
-//         }else if (winner=="Human"){
-//             humanScore++;
-//         }else{
-//             continue;
-//         }
-//         instruction.textContent = `SELECT AN OPTION`;
-//     }
-//     whoWon = getWhoWon(humanScore, computerScore);
-//     alert(whoWon);
-// }
-
 function getWhoWon(humanScore,computerScore){
     if(humanScore> computerScore){
         return "You Won!"
@@ -126,9 +107,31 @@ function playGame(){
     let round = 0;
         buttons.forEach((button)=>{
             button.addEventListener("click",(button)=>{
+                scoreCard.style.backgroundColor = "rgb(27, 26, 26)";
+                round++;
                 let humanChoice = button.target.id;
-                instruction.textContent = `Round ${round+1}/5`;
-                playRound(humanChoice);
+                instruction.textContent = `Round ${round }/5`;
+                winner = playRound(humanChoice);
+                winner = playRound(humanChoice);
+                if(winner == "Computer" ){
+                    computerScore++;
+                }else if (winner=="Human"){
+                    humanScore++;
+                }
+                scores.textContent = `HUMAN = ${humanScore} || COMPUTER = ${computerScore}`;
+                if(round==5){
+                    whoWon = getWhoWon(humanScore, computerScore);
+                    playRoundText.textContent = "GAME OVER";
+                    scores.textContent = whoWon;
+                    if (whoWon == "You Won!"){
+                        scoreCard.style.backgroundColor = "#008000";
+                    }else{
+                        scoreCard.style.backgroundColor = "#8B0000";
+                    }
+                    round = 0;
+                    humanScore = 0;
+                    computerScore = 0;
+                }
             });
         });
 }
