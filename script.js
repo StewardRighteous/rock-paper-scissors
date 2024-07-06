@@ -163,9 +163,11 @@ function getWinningElementText(winningElement){
                 IF computer == human THEN DRAW */
 
 function playGame(){
+    const instruction = document.querySelector("#round");
     let humanScore = 0;
     let computerScore = 0;
     for (let i = 0; i < 5; i++) {
+        instruction.textContent = `Round ${i+1}/5`;
         winner = playRound();
         if(winner == "Computer" ){
             computerScore++;
@@ -174,6 +176,7 @@ function playGame(){
         }else{
             continue;
         }
+        instruction.textContent = `SELECT AN OPTION`;
     }
     whoWon = getWhoWon(humanScore, computerScore);
     alert(whoWon);
@@ -189,4 +192,4 @@ function getWhoWon(humanScore,computerScore){
     }
 }
 
-// playGame();
+playGame();
