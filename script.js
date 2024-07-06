@@ -1,5 +1,6 @@
 const instruction = document.querySelector("#round");
 const buttons = document.querySelectorAll("div.buttons");
+const playRoundText = document.querySelector("div.playround");
 
 // Computer generates Rock, paper or scissor
 function getComputerChoice(){
@@ -54,7 +55,7 @@ function playRound(humanButtonChoice){
     let winningElement = getWinningElement(humanChoice, computerChoice);
     let winner = getWinner(computerChoice, humanChoice);
     let winnerText = getWinnerText(winner) + '' + getWinningElementText(winningElement);
-    console.log(winnerText);
+    playRoundText.textContent = winnerText;
     return winner;
 }
 
