@@ -1,19 +1,7 @@
-/* ROCK, PAPER AND SCISSORS GAME ALGORITHM:
-    1. Computer generates Rock, paper or scissor
-    2. Get value from user for Rock, paper and scissor
-    3. Compare the value and say say who won
-    4. Give points to the person won
-    5. Final Winner Message */
+const instruction = document.querySelector("#round");
+const buttons = document.querySelectorAll("div.buttons");
 
 // Computer generates Rock, paper or scissor
-    /*  variables : randomNumber, choice
-        output : Rock/ paper/ scissors
-        input : null
-        procedure:
-            Generate Random Number
-            Change that number into Rock or paper or scissors
-            Store it as computer Choice */
-
 function getComputerChoice(){
     let randomNumber = Math.random();
     let choice = convertNumToChoice(randomNumber);
@@ -30,49 +18,7 @@ function convertNumToChoice(randomNumber){
     }
 }
 
-// Get value form user for Rock Paper and Scissor
-    /*  variables : shortFormChoice, choice
-        output: Rock/ paper/ Scissors
-        input: user gives R/P/S (short form)
-        procedure:
-            Create a prompt to get value (shortform)
-            convert shortForm to choice
-                IF human gave unknown choice THEN return error
-            Store it as Human Choice */
-
-function getHumanChoice(){
-    let shortFormChoice = prompt(`Rock(R), Paper(P) and Scissors(S) - Enter your Choice : `);
-    let choice = convertShortFormToChoice(shortFormChoice);
-    return choice;
-}
-
-function convertShortFormToChoice(shortFormChoice){
-    switch (shortFormChoice){
-        case "R" || "r":
-            return "Rock"
-        case "P" || "p":
-            return "Paper"
-        case "S" || "s":
-            return "Scissors";
-        default:
-            console.error("Wrong Input Value \n Enter R for Rock, P for Paper, S for Scissors ");
-            return "Error";
-    }
-}
-
 // Compare the values and say who won
-    /*  variables : computerChoice, humanChoice, combineChoice, winner
-        output: Computer or Human
-        input : computerChoice, humanChoice
-        procedure:
-            Get user and computer choices
-            Create conditions that returns which wins
-                IF rock AND scissors THEN rock
-                IF scissors AND paper THEN scissors
-                IF paper and rock THEN paper
-                IF both are same THEN draw
-            Use that value to return the winner name or draw*/
-
 function getWinner(computerChoice, humanChoice){
     let winningElement = getWinningElement(computerChoice,humanChoice);
     let winner = checkWinningElement(winningElement, computerChoice, humanChoice);
@@ -102,25 +48,9 @@ function checkWinningElement(winningElement, computerChoice, humanChoice){
 }
 
 //Give points to the person who won
-    /*  variables: humanChoice, computerChoice, computerPoint, humanPoint, winner
-        output: Point goes to YOU or COMPUTER
-        input: winner
-        procedure:
-            Have initial points as 0 for both human and computer
-            Get values for both human and computer
-                IF human gave unknown choice THEN return nothing and start again
-            Find the winner 
-            Print who won followed by element they chose as sentence
-                find who won or draw
-                find element that won
-            Add points to winner*/
-
-function playRound(){
+function playRound(humanButtonChoice){
     let computerChoice = getComputerChoice();
-    let humanChoice = getHumanChoice();
-    if(humanChoice == "Error"){
-        return;
-    }
+    let humanChoice = humanButtonChoice;
     let winningElement = getWinningElement(humanChoice, computerChoice);
     let winner = getWinner(computerChoice, humanChoice);
     let winnerText = getWinnerText(winner) + '' + getWinningElementText(winningElement);
@@ -151,24 +81,13 @@ function getWinningElementText(winningElement){
 }
 
 // Final Winner Message
-    /*  variables: humanScore, computerScore, winner
-        output: You WON or You LOST or DRAW
-        input: humanScore, computerScore
-        procedure:
-            Initialize human and computer scores
-            Loop 5 matches of playround and Increase values in each round according to winner
-            After completing five rounds, print the winner using Alert
-                IF human > computer THEN you WON
-                IF computer > human THEN you LOST
-                IF computer == human THEN DRAW */
-
 function playGame(){
-    const instruction = document.querySelector("#round");
     let humanScore = 0;
     let computerScore = 0;
     for (let i = 0; i < 5; i++) {
+        let humanChoice = getHumanChoice();
         instruction.textContent = `Round ${i+1}/5`;
-        winner = playRound();
+        winner = playRound(humanChoice);
         if(winner == "Computer" ){
             computerScore++;
         }else if (winner=="Human"){
@@ -190,6 +109,23 @@ function getWhoWon(humanScore,computerScore){
     }else{
         return "DRAW!"
     }
+}
+
+/* GETTING HUMAN CHOICE USING BUTTON
+    var: humanChoice
+    output: rock/paper/scissor
+    input: button click
+    procedure:
+        Game will start after only button click 
+        add event listener to buttons and let them start*/
+
+function playGame(){
+    buttons.forEach((button)=>{
+        button.addEventListener("click",(button)=>{
+            let humanChoice = button.target.id;
+            playRound(humanChoice);
+        });
+    });
 }
 
 playGame();
