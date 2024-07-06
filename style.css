@@ -33,7 +33,7 @@ button{
     font-family: monospace;
 }
 
-.scorecard{
+.scorecard, .instruction{
     height: 55px;
     width: 318px;
     background-color: rgb(27, 26, 26);
@@ -43,5 +43,11 @@ button{
     align-items: center;
     justify-content: center;
     gap: 8px;
+}
+
+.instruction{
+    width: fit-content;
+    height: fit-content;
+    padding: 8px;
 }
 
