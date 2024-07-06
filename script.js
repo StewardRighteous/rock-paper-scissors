@@ -115,7 +115,7 @@ function checkWinningElement(winningElement, computerChoice, humanChoice){
                 find element that won
             Add points to winner*/
 
-function playground(){
+function playRound(){
     let computerChoice = getComputerChoice();
     let humanChoice = getHumanChoice();
     if(humanChoice == "Error"){
@@ -156,7 +156,7 @@ function getWinningElementText(winningElement){
         input: humanScore, computerScore
         procedure:
             Initialize human and computer scores
-            Loop 5 matches of playground and Increase values in each round according to winner
+            Loop 5 matches of playround and Increase values in each round according to winner
             After completing five rounds, print the winner using Alert
                 IF human > computer THEN you WON
                 IF computer > human THEN you LOST
@@ -166,7 +166,7 @@ function playGame(){
     let humanScore = 0;
     let computerScore = 0;
     for (let i = 0; i < 5; i++) {
-        winner = playground();
+        winner = playRound();
         if(winner == "Computer" ){
             computerScore++;
         }else if (winner=="Human"){
@@ -189,4 +189,4 @@ function getWhoWon(humanScore,computerScore){
     }
 }
 
-playGame();
+// playGame();
